@@ -1,4 +1,5 @@
-# webpack-template
+# Simple Library
+- Form validation practice
 
   🧱 Tech Stack & Tools<br>
 <ul>
