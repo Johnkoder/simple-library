@@ -2,7 +2,7 @@ export default class Book {
   #id = crypto.randomUUID();
   #name;
   #author;
-  constructor(name, author) {
+  constructor(name = 'N/A', author = 'N/A') {
     this.#name = name;
     this.#author = author;
   }

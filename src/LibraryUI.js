@@ -6,7 +6,7 @@ export default class LibraryUI {
     this.logic = new Library();
     this.libraryCont = document.querySelector('.library-cont');
     this.libraryForm = this.libraryCont.querySelector('form');
-    this.libraryCont = this.libraryCont.querySelector('.books-cont');
+    this.booksCont = this.libraryCont.querySelector('.books-cont');
 
     this.bookNameInput = this.libraryForm.querySelector('#book-name');
     this.bookAuthorInput = this.libraryForm.querySelector('#author-name');
@@ -14,14 +14,29 @@ export default class LibraryUI {
   }
 
   init() {
-    console.log(this.libraryForm);
+    this.handleEvent('submit', this.libraryForm, this.handleSubmitForm);
+    this.createInitialBooks();
+    this.renderBooks();
   }
 
-  handleSubmitBtn() {
+  handleSubmitForm = (e) => {
+    e.preventDefault();
+    console.log('SUBMITTED!');
+    console.log(this.logic.getBookList);
+  };
+
+  renderBooks() {
     return;
   }
 
+  createInitialBooks() {
+    this.logic.createBook('test');
+  }
+
+  // helper
   handleEvent(type, el, callback) {
-    return;
+    el.addEventListener(type, (e) => {
+      callback(e);
+    });
   }
 }
