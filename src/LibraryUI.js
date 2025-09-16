@@ -21,12 +21,33 @@ export default class LibraryUI {
 
   handleSubmitForm = (e) => {
     e.preventDefault();
-    console.log('SUBMITTED!');
-    console.log(this.logic.getBookList);
+    const nameInput = this.bookNameInput;
+    const authorInput = this.bookAuthorInput;
+    this.logic.createBook(nameInput.value, authorInput.value);
+    nameInput.value = '';
+    authorInput.value = '';
+    this.renderBooks();
   };
 
   renderBooks() {
-    return;
+    this.removeChildren(this.booksCont);
+    this.logic.getBookList.forEach((book) => {
+      const root = document.createElement('div');
+      root.className = 'book-item';
+      root.innerHTML = `
+      <div>
+        <p>${book.getName}</p>
+        <p>${book.getAuthor}</p>
+      <div>
+
+      <div>
+        <button class="delete-btn">Delete</button>
+        <button class="update-btn">Update</button>
+      </div>
+    `;
+
+      this.booksCont.append(root);
+    });
   }
 
   createInitialBooks() {
@@ -38,5 +59,11 @@ export default class LibraryUI {
     el.addEventListener(type, (e) => {
       callback(e);
     });
+  }
+
+  removeChildren(el) {
+    while (el.firstChild) {
+      el.removeChild(el.lastChild);
+    }
   }
 }
