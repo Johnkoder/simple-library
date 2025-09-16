@@ -1,3 +1,5 @@
-const hello = 'hello';
+import LibraryUI from './LibraryUI.js';
 
-console.log(hello);
+document.addEventListener('DOMContentLoaded', (e) => {
+  new LibraryUI().init();
+});
