@@ -5,7 +5,7 @@ export default class LibraryUI {
   constructor() {
     this.logic = new Library();
     this.libraryCont = document.querySelector('.library-cont');
-    this.libraryForm = this.libraryCont.querySelector('form');
+    this.libraryForm = this.libraryCont.querySelector('.library-form');
     this.booksCont = this.libraryCont.querySelector('.books-cont');
 
     this.bookNameInput = this.libraryForm.querySelector('#book-name');
@@ -32,21 +32,9 @@ export default class LibraryUI {
   renderBooks() {
     this.removeChildren(this.booksCont);
     this.logic.getBookList.forEach((book) => {
-      const root = document.createElement('div');
-      root.className = 'book-item';
-      root.innerHTML = `
-      <div>
-        <p>${book.getName}</p>
-        <p>${book.getAuthor}</p>
-      <div>
+      const bookUi = new BookUi(book).createBookUI();
 
-      <div>
-        <button class="delete-btn">Delete</button>
-        <button class="update-btn">Update</button>
-      </div>
-    `;
-
-      this.booksCont.append(root);
+      this.booksCont.append(bookUi);
     });
   }
 
@@ -65,5 +53,49 @@ export default class LibraryUI {
     while (el.firstChild) {
       el.removeChild(el.lastChild);
     }
+  }
+}
+
+class BookUi {
+  constructor(book) {
+    this.book = book;
+
+    this.libraryCont = document.querySelector('.library-cont');
+    this.dialogForm = this.libraryCont.querySelector('.dialog-form');
+    this.bookNameInput = this.dialogForm.querySelector('.book-name-edit');
+    this.bookAuthorInput = this.dialogForm.querySelector('.author-name-edit');
+  }
+
+  createBookUI() {
+    const root = document.createElement('div');
+    root.className = 'book-item';
+    root.innerHTML = `
+      <div>
+        <p>${this.book.getName}</p>
+        <p>${this.book.getAuthor}</p>
+      <div>
+
+      <div>
+        <button class="delete-btn">Delete</button>
+        <button class="update-btn">Update</button>
+      </div>
+    `;
+
+    return root;
+  }
+
+  handleUpdateBtn() {
+    return;
+  }
+
+  handleDeleteBtn() {
+    return;
+  }
+
+  // helper
+  handleEvent(type, el, callback) {
+    el.addEventListener(type, (e) => {
+      callback(e);
+    });
   }
 }
