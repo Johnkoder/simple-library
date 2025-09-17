@@ -2,9 +2,9 @@ export default class Book {
   #id = crypto.randomUUID();
   #name;
   #author;
-  constructor(name = 'N/A', author = 'N/A') {
-    this.#name = name;
-    this.#author = author;
+  constructor(name, author) {
+    this.#name = name === '' ? 'N/A' : name;
+    this.#author = author === '' ? 'N/A' : author;
   }
 
   set setName(name) {
