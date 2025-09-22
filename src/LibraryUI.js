@@ -115,7 +115,7 @@ class BookUi {
       <div>
         <p>${this.book.getName}</p>
         <p>${this.book.getAuthor}</p>
-      <div>
+      </div>
 
       <div>
         <button class="delete-btn">Delete</button>
