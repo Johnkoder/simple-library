@@ -1,4 +1,5 @@
 import Library from './Library.js';
+import Validation from './Validation.js';
 import './styles/library.css';
 
 export default class LibraryUI {
@@ -33,6 +34,7 @@ export default class LibraryUI {
 
   handleSubmitForm = (e) => {
     e.preventDefault();
+    console.log(this.bookNameInput.checkValidity());
     const nameInput = this.bookNameInput;
     const authorInput = this.bookAuthorInput;
     this.logic.createBook(nameInput.value, authorInput.value);
