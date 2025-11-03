@@ -1,5 +1,4 @@
 import Library from './Library.js';
-import Validation from './Validation.js';
 import './styles/library.css';
 
 export default class LibraryUI {
