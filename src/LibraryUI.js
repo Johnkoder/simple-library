@@ -11,11 +11,13 @@ export default class LibraryUI {
     this.bookNameInput = this.libraryForm.querySelector('#book-name');
     this.bookAuthorInput = this.libraryForm.querySelector('#author-name');
     this.submitBtn = this.libraryForm.querySelector('input[type="submit"]');
+    this.errContForm = this.libraryForm.querySelector('.err-cont-form');
 
     this.dialogEdit = this.libraryCont.querySelector('.dialog-edit');
     this.dialogForm = this.libraryCont.querySelector('.dialog-form');
     this.bookNameInputEdit = this.dialogForm.querySelector('#book-name-edit');
     this.authorNameInputEdit = this.dialogForm.querySelector('#author-name-edit');
+    this.errContEditForm = this.dialogForm.querySelector('.err-cont-edit-form');
 
     this.cancelBtnEdit = this.dialogForm.querySelector('.cancel-btn-edit');
     this.submitBtnEdit = this.dialogForm.querySelector('input[type="text"]');
@@ -33,27 +35,42 @@ export default class LibraryUI {
 
   handleSubmitForm = (e) => {
     e.preventDefault();
-    console.log(this.bookNameInput.checkValidity());
-    const nameInput = this.bookNameInput;
-    const authorInput = this.bookAuthorInput;
-    this.logic.createBook(nameInput.value, authorInput.value);
-    nameInput.value = '';
-    authorInput.value = '';
-    this.renderBooks();
+
+    if (!this.bookNameInput.checkValidity()) {
+      this.errContForm.textContent = this.bookNameInput.validationMessage;
+    } else {
+      const nameInput = this.bookNameInput;
+      const authorInput = this.bookAuthorInput;
+      this.logic.createBook(nameInput.value, authorInput.value);
+      nameInput.value = '';
+      authorInput.value = '';
+      this.renderBooks();
+
+      this.errContForm.textContent = '';
+    }
   };
 
   handleSubmitFormEdit = (e) => {
     e.preventDefault();
-    this.logic.updateBook(
-      this.currentEditingId,
-      this.bookNameInputEdit.value,
-      this.authorNameInputEdit.value
-    );
-    this.bookNameInputEdit.value = '';
-    this.authorNameInputEdit.value = '';
-    this.dialogEdit.close();
-    this.currentEditingId = null;
-    this.renderBooks();
+
+    if (!this.bookNameInputEdit.checkValidity()) {
+      this.errContEditForm.textContent = this.bookNameInputEdit.validationMessage;
+    } else {
+      this.logic.updateBook(
+        this.currentEditingId,
+        this.bookNameInputEdit.value,
+        this.authorNameInputEdit.value || 'N/A'
+      );
+
+      this.dialogEdit.close();
+      this.currentEditingId = null;
+      this.renderBooks();
+
+      this.bookNameInputEdit.value = '';
+      this.authorNameInputEdit.value = '';
+
+      this.errContEditForm.textContent = '';
+    }
   };
 
   renderBooks() {

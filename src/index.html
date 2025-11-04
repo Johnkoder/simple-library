@@ -15,12 +15,13 @@
           <fieldset>
             <label for="book-name">
               <span>Book name:</span>
-              <input type="text" id="book-name" name="book-name" required>
+              <input type="text" id="book-name" name="book-name" minlength="2" required>
+              <span class="err-cont-form"></span>
             </label>
             
             <label for="author-name">
               <span>Author:</span>
-              <input type="text" id="author-name" name="author-name">              
+              <input type="text" id="author-name" name="author-name">   
             </label>
           </fieldset>
 
@@ -33,12 +34,13 @@
             <div>
               <label for="book-name-edit">
                 <span>Book name:</span>
-                <input type="text" id="book-name-edit" name="book-name">
+                <input type="text" id="book-name-edit" name="book-name"  minlength="2" required>
+                <span class="err-cont-edit-form"></span>
               </label>
               
               <label for="author-name-edit">
                 <span>Author:</span>
-                <input type="text" id="author-name-edit" name="author-name">              
+                <input type="text" id="author-name-edit" name="author-name" required> 
               </label>
             </div>
 

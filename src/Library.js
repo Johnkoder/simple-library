@@ -25,8 +25,8 @@ export default class Library {
 
   updateBook(id, name, author) {
     const bookIdx = this.findBookIdx(id);
-    this.#bookList[bookIdx].setName = name;
-    this.#bookList[bookIdx].setAuthor = author;
+    this.#bookList[bookIdx].setName = name || 'N/A';
+    this.#bookList[bookIdx].setAuthor = author || 'N/A';
   }
 
   // helper

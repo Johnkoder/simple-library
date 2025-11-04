@@ -4,7 +4,7 @@ export default class Book {
   #author;
   constructor(name, author) {
     this.#name = name === '' ? 'N/A' : name;
-    this.#author = author === '' ? 'N/A' : author;
+    this.#author = author || 'N/A';
   }
 
   set setName(name) {
