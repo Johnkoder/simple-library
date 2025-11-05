@@ -29,15 +29,36 @@ export default class LibraryUI {
     this.handleEvent('submit', this.libraryForm, this.handleSubmitForm);
     this.handleEvent('submit', this.dialogForm, this.handleSubmitFormEdit);
     this.handleEvent('click', this.cancelBtnEdit, this.handleCancelBtn);
+    this.handleEvent('input', this.bookNameInput, this.handleInputError);
+    this.handleEvent('input', this.bookNameInputEdit, this.handleInputErrorEdit);
     this.createInitialBooks();
     this.renderBooks();
   }
+
+  handleInputError = () => {
+    if (!this.bookNameInput.checkValidity()) {
+      this.errContForm.textContent = this.bookNameInput.validationMessage;
+      this.errContForm.classList.add('active');
+    } else {
+      this.errContForm.classList.remove('active');
+    }
+  };
+
+  handleInputErrorEdit = () => {
+    if (!this.bookNameInputEdit.checkValidity()) {
+      this.errContEditForm.textContent = this.bookNameInputEdit.validationMessage;
+      this.errContEditForm.classList.add('active');
+    } else {
+      this.errContEditForm.classList.remove('active');
+    }
+  };
 
   handleSubmitForm = (e) => {
     e.preventDefault();
 
     if (!this.bookNameInput.checkValidity()) {
       this.errContForm.textContent = this.bookNameInput.validationMessage;
+      this.errContForm.className = 'err-cont-form active';
     } else {
       const nameInput = this.bookNameInput;
       const authorInput = this.bookAuthorInput;
@@ -46,7 +67,7 @@ export default class LibraryUI {
       authorInput.value = '';
       this.renderBooks();
 
-      this.errContForm.textContent = '';
+      this.errContForm.className = 'err-cont-form';
     }
   };
 
@@ -55,6 +76,7 @@ export default class LibraryUI {
 
     if (!this.bookNameInputEdit.checkValidity()) {
       this.errContEditForm.textContent = this.bookNameInputEdit.validationMessage;
+      this.errContEditForm.className = 'err-cont-edit-form active';
     } else {
       this.logic.updateBook(
         this.currentEditingId,
@@ -69,7 +91,7 @@ export default class LibraryUI {
       this.bookNameInputEdit.value = '';
       this.authorNameInputEdit.value = '';
 
-      this.errContEditForm.textContent = '';
+      this.errContForm.className = 'err-cont-edit-form';
     }
   };
 

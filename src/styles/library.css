@@ -54,3 +54,33 @@ form.library-form fieldset {
   padding: 15px 20px;
   border-radius: 5px;
 }
+
+/* validation styles */
+
+#book-name:invalid {
+  border-color: red;
+}
+
+#book-name:focus:invalid {
+  outline-color: red;
+}
+
+.err-cont-form {
+  display: none;
+}
+
+#book-name-edit:invalid {
+  border-color: red;
+}
+
+#book-name-edit:focus:invalid {
+  outline-color: red;
+}
+
+.err-cont-edit-form {
+  display: none;
+}
+
+.active {
+  display: inline-block;
+}
